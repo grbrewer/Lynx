@@ -200,4 +200,10 @@ public class WordAnalyzerTest {
         WordAnalyzer wordAnalyzer = new WordAnalyzer();
         wordAnalyzer.printStatisticsReport("Hello world & good morning. The date is 18/05/2016");
     }
+
+    @Test
+    public void testBibleFromFile() {
+        WordAnalyzer wordAnalyzer = new WordAnalyzer("C:\\Users\\gavin\\OneDrive\\Documents\\bible_daily.txt");
+        wordAnalyzer.printStatisticsReport();
+    }
 }
