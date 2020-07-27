@@ -15,7 +15,7 @@ public class WordAnalyzerTest {
 
      @Test
      public void testWordCountFromFile() {
-         WordAnalyzer wordAnalyzer = new WordAnalyzer("C:\\Users\\gavin\\OneDrive\\Documents\\test_data.txt");
+         WordAnalyzer wordAnalyzer = new WordAnalyzer("C:\\Temp\\test_data.txt");
          int wordCount = wordAnalyzer.getWordCount();
 
          Assertions.assertEquals(25, wordCount);
@@ -33,7 +33,7 @@ public class WordAnalyzerTest {
 
     @Test
     public void testGetStatisticsFromFile() {
-        WordAnalyzer wordAnalyzer = new WordAnalyzer("C:\\Users\\gavin\\OneDrive\\Documents\\test_data.txt");
+        WordAnalyzer wordAnalyzer = new WordAnalyzer("C:\\Temp\\test_data.txt");
         Hashtable<Integer,Integer> wordDictionary = wordAnalyzer.getStatistics();
 
         Assertions.assertEquals(7, wordDictionary.get(4));
@@ -50,7 +50,7 @@ public class WordAnalyzerTest {
 
     @Test
     public void testGetAverageFromFile() {
-        WordAnalyzer wordAnalyzer = new WordAnalyzer("C:\\Users\\gavin\\OneDrive\\Documents\\test_data.txt");
+        WordAnalyzer wordAnalyzer = new WordAnalyzer("C:\\Temp\\test_data.txt");
         double average = wordAnalyzer.getAverage();
 
         Assertions.assertEquals(3.44, average);
@@ -67,7 +67,7 @@ public class WordAnalyzerTest {
     @Test
     public void testGetMostFrequentWordLengthFromFile()
     {
-        WordAnalyzer wordAnalyzer = new WordAnalyzer("C:\\Users\\gavin\\OneDrive\\Documents\\test_data.txt");
+        WordAnalyzer wordAnalyzer = new WordAnalyzer("C:\\Temp\\test_data.txt");
         int mostFrequentWordLength = wordAnalyzer.getMostFrequentWordLength();
 
         Assertions.assertEquals(7, mostFrequentWordLength);
@@ -85,7 +85,7 @@ public class WordAnalyzerTest {
 
     @Test
     public void testGetMaximalWordLengthsFromFile() {
-        WordAnalyzer wordAnalyzer = new WordAnalyzer("C:\\Users\\gavin\\OneDrive\\Documents\\test_data.txt");
+        WordAnalyzer wordAnalyzer = new WordAnalyzer("C:\\Temp\\test_data.txt");
         List<Integer> maximalWordLengths = wordAnalyzer.getMaximalWordLengths();
 
         Assertions.assertEquals(4, maximalWordLengths.get(0));
@@ -106,7 +106,7 @@ public class WordAnalyzerTest {
 
     @Test
     public void testGetWordLengths() {
-        WordAnalyzer wordAnalyzer = new WordAnalyzer("C:\\Users\\gavin\\OneDrive\\Documents\\test_data.txt");
+        WordAnalyzer wordAnalyzer = new WordAnalyzer("C:\\Temp\\test_data.txt");
         List<Integer> rawData = wordAnalyzer.getWordLengths();
 
         //Data obtained from the 1st line grabbed
@@ -125,7 +125,7 @@ public class WordAnalyzerTest {
 
     @Test
     public void testPrintWordCount() {
-        WordAnalyzer wordAnalyzer = new WordAnalyzer("C:\\Users\\gavin\\OneDrive\\Documents\\test_data.txt");
+        WordAnalyzer wordAnalyzer = new WordAnalyzer("C:\\Temp\\test_data.txt");
 
         String wordCountString = wordAnalyzer.printWordCount();
 
@@ -134,7 +134,7 @@ public class WordAnalyzerTest {
 
     @Test
     public void testPrintAverage() {
-        WordAnalyzer wordAnalyzer = new WordAnalyzer("C:\\Users\\gavin\\OneDrive\\Documents\\test_data.txt");
+        WordAnalyzer wordAnalyzer = new WordAnalyzer("C:\\Temp\\test_data.txt");
 
         String averageString = wordAnalyzer.printAverage();
 
@@ -158,7 +158,7 @@ public class WordAnalyzerTest {
 
     @Test
     public void testPrintStatisticsFromFile() {
-        WordAnalyzer wordAnalyzer = new WordAnalyzer("C:\\Users\\gavin\\OneDrive\\Documents\\test_data.txt");
+        WordAnalyzer wordAnalyzer = new WordAnalyzer("C:\\Temp\\test_data.txt");
 
         List<String> statsList = wordAnalyzer.printStatistics();
 
@@ -180,7 +180,7 @@ public class WordAnalyzerTest {
 
     @Test
     public void testPrintMaximumWordLengthsFromFile() {
-        WordAnalyzer wordAnalyzer = new WordAnalyzer("C:\\Users\\gavin\\OneDrive\\Documents\\test_data.txt");
+        WordAnalyzer wordAnalyzer = new WordAnalyzer("C:\\Temp\\test_data.txt");
 
         String maxWordLengths = wordAnalyzer.printMaximumWordLengths();
 
@@ -191,7 +191,7 @@ public class WordAnalyzerTest {
 
     @Test
     public void testPrintStatisticsReportFromFile() {
-        WordAnalyzer wordAnalyzer = new WordAnalyzer("C:\\Users\\gavin\\OneDrive\\Documents\\test_data.txt");
+        WordAnalyzer wordAnalyzer = new WordAnalyzer("C:\\Temp\\test_data.txt");
         wordAnalyzer.printStatisticsReport();
     }
 
@@ -203,7 +203,7 @@ public class WordAnalyzerTest {
 
     @Test
     public void testBibleFromFile() {
-        WordAnalyzer wordAnalyzer = new WordAnalyzer("C:\\Users\\gavin\\OneDrive\\Documents\\bible_daily.txt");
+        WordAnalyzer wordAnalyzer = new WordAnalyzer("C:\\Temp\\bible_daily.txt");
         wordAnalyzer.printStatisticsReport();
     }
 }

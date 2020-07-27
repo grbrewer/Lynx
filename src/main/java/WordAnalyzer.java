@@ -3,6 +3,12 @@ import java.io.IOException;
 import java.util.*;
 import java.io.BufferedReader;
 
+/**
+ * This class will take a standard text file, process it
+ * and return statistics on word lengths and their frequencies.
+ * @author Gavin Brewer
+ * @version 1.0
+ */
 public class WordAnalyzer {
 
     List<Integer> _wordLengths;
@@ -12,6 +18,10 @@ public class WordAnalyzer {
 
     }
 
+    /**
+     * Constructor reads a text file, line-by-line and converts it into a list of word lengths.
+     * @param path the path of the file under test.
+     */
     public WordAnalyzer(String path) {
         try {
             _wordLengths = new ArrayList<Integer>();
@@ -28,11 +38,21 @@ public class WordAnalyzer {
         }
     }
 
+    /**
+     * Returns a list of Integers representing word lengths.
+     * @return the list of word lengths
+     */
     public List<Integer> getWordLengths()
     {
         return _wordLengths;
     }
 
+    /**
+     * Returns a list of Integers representing word lengths
+     * from a given string.
+     * @param str the string under test
+     * @return the list of word lengths
+     */
     public List<Integer> getRawData(String str) {
         str = str.replaceAll("\\.", "");    //FIX: remove all dot characters from input
 
@@ -47,6 +67,11 @@ public class WordAnalyzer {
         return wordLengths;
     }
 
+    /**
+     * Returns the number of words in a given string.
+     * @param str the string under test
+     * @return the number of words returned
+     */
     public int getWordCount(String str) {
         str = str.replaceAll("\\.", "");    //FIX: remove all dot characters from input
 
@@ -54,10 +79,21 @@ public class WordAnalyzer {
         return stringList.length;
     }
 
+    /**
+     * Returns the number of words held within a given file
+     * being processed by a WordAnalyzer object.
+     * @return the number of words returned
+     */
     public int getWordCount() {
         return _wordLengths.size();
     }
 
+    /**
+     * Generates a HashTable detailing key lengths and their frequencies,
+     * for a given string.
+     * @param str the string under test
+     * @return the hashtable of lengths and frequencies
+     */
     public Hashtable<Integer, Integer> getStatistics(String str) {
         str = str.replaceAll("\\.", "");    //FIX: remove all dot characters from input
 
@@ -88,6 +124,11 @@ public class WordAnalyzer {
         return statsDictionary;
     }
 
+    /**
+     * Generates a HashTable detailing key lengths and their frequencies,
+     * for a text file being processed by WordAnalyzer
+     * @return the hashtable of lengths and frequencies
+     */
     public Hashtable<Integer, Integer> getStatistics() {
         Hashtable<Integer, Integer> statsDictionary = new Hashtable<Integer, Integer>();
 
@@ -109,6 +150,11 @@ public class WordAnalyzer {
         return statsDictionary;
     }
 
+    /**
+     * Finds the average length of words in a given string.
+     * @param str the string under test
+     * @return the average length of words in the string
+     */
     public double getAverage(String str) {
         str = str.replaceAll("\\.", "");    //FIX: remove all dot characters from input
 
@@ -127,6 +173,11 @@ public class WordAnalyzer {
         return (double) sum / wordLengths.size();
     }
 
+    /**
+     * Finds the average length of strings in a given file,
+     * currently being processed by a WordAnalyzer object.
+     * @return the average length of words in the file
+     */
     public double getAverage() {
         int sum = 0;
         for(int wordLength : _wordLengths)
@@ -135,6 +186,12 @@ public class WordAnalyzer {
         return (double) sum / _wordLengths.size();
     }
 
+    /**
+     * Finds the most frequent word length from the WordAnalyzer's hashtable,
+     * for a given string.
+     * @param str the string under test
+     * @return the most frequent word length.
+     */
     public int getMostFrequentWordLength(String str) {
         Hashtable<Integer, Integer> statistics = getStatistics(str);
 
@@ -152,6 +209,11 @@ public class WordAnalyzer {
         return max;
     }
 
+    /**
+     * Finds the most frequent word length from the WordAnalyzer's hashtable,
+     * for a given file.
+     * @return the most frequent word length.
+     */
     public int getMostFrequentWordLength() {
         Hashtable<Integer, Integer> statistics = getStatistics();
 
@@ -169,6 +231,12 @@ public class WordAnalyzer {
         return max;
     }
 
+    /**
+     * Finds a list of those word lengths with the highest frequency,
+     * for a given string.
+     * @param str the string under test
+     * @return a list of those word lengths with highest frequency
+     */
     public List<Integer> getMaximalWordLengths(String str) {
         Hashtable<Integer, Integer> statistics = getStatistics(str);
         List<Integer> maximalElements = new ArrayList<Integer>();
@@ -189,6 +257,11 @@ public class WordAnalyzer {
         return maximalElements;
     }
 
+    /**
+     * Finds a list of those word lengths with the highest frequency,
+     * for a given file under WordAnalyzer.
+     * @return a list of those word lengths with highest frequency
+     */
     public List<Integer> getMaximalWordLengths() {
         Hashtable<Integer, Integer> statistics = getStatistics();
         List<Integer> maximalElements = new ArrayList<Integer>();
@@ -209,22 +282,46 @@ public class WordAnalyzer {
         return maximalElements;
     }
 
+    /**
+     * Pretty print the word count for a given file.
+     * @return the word count
+     */
     public String printWordCount() {
         return "Word count = " + getWordCount();
     }
 
+    /**
+     * Pretty print the word count for a given string.
+     * @param str the string under test
+     * @return the word count
+     */
     public String printWordCount(String str) {
         return "Word count = " + getWordCount(str);
     }
 
+    /**
+     * Pretty print the average of word lengths in a given file.
+     * @return the average word length
+     */
     public String printAverage() {
         return String.format("Average word length = %.3f", getAverage());
     }
 
+    /**
+     * Pretty print the average of word lengths in a given string
+     * @param str the string under test
+     * @return the average word length
+     */
     public String printAverage(String str) {
         return String.format("Average word length = %.3f", getAverage(str));
     }
 
+    /**
+     * Generate a list of strings to convey frequencies for
+     * words of different lengths, for a given string.
+     * @param str the string under test
+     * @return the list of strings describing lengths and their frequencies
+     */
     public List<String> printStatistics(String str) {
         Hashtable<Integer, Integer> statistics = getStatistics(str);
         List<String> statsList = new ArrayList<String>();
@@ -245,6 +342,11 @@ public class WordAnalyzer {
         return statsList;
     }
 
+    /**
+     * Generate a list of strings to convey frequencies for
+     * words of different lengths, for a given file.
+     * @return the list of strings describing lengths and their frequencies
+     */
     public List<String> printStatistics() {
         Hashtable<Integer, Integer> statistics = getStatistics();
         List<String> statsList = new ArrayList<String>();
@@ -265,6 +367,12 @@ public class WordAnalyzer {
         return statsList;
     }
 
+    /**
+     * Summarizes the most frequently occurring word lengths,
+     * for a given string.
+     * @param str the string under test
+     * @return the formatted output summarizing word lengths
+     */
     public String printMaximumWordLengths(String str) {
 
         String preamble = String.format("The most frequently occurring word length is %d, for word lengths of ",
@@ -287,6 +395,11 @@ public class WordAnalyzer {
         return preamble + wordLengthList;
     }
 
+    /**
+     * Summarizes the most frequently occurring word lengths,
+     * for a given file
+     * @return the formatted output summarizing word lengths
+     */
     public String printMaximumWordLengths() {
         String preamble = String.format("The most frequently occurring word length is %d, for word lengths of ",
                 getMostFrequentWordLength());
@@ -308,6 +421,10 @@ public class WordAnalyzer {
         return preamble + wordLengthList;
     }
 
+    /**
+     * Pretty print a report summarizing the results of
+     * WordAnalyzer's analysis of a given file.
+     */
     public void printStatisticsReport()
     {
         System.out.println(printWordCount());
@@ -323,6 +440,11 @@ public class WordAnalyzer {
         System.out.println(printMaximumWordLengths());
     }
 
+    /**
+     * Pretty print a report summarizing the results of
+     * WordAnalyzer's analysis of a given string.
+     * @param str the string under test
+     */
     public void printStatisticsReport(String str)
     {
         System.out.println(printWordCount(str));
