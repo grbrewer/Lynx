@@ -53,7 +53,7 @@ public class WordAnalyzerTest {
         WordAnalyzer wordAnalyzer = new WordAnalyzer("C:\\Users\\gavin\\OneDrive\\Documents\\test_data.txt");
         double average = wordAnalyzer.getAverage();
 
-        Assertions.assertEquals(3.48, average);
+        Assertions.assertEquals(3.44, average);
     }
 
     @Test
@@ -121,5 +121,47 @@ public class WordAnalyzerTest {
         Assertions.assertEquals(4, rawData.get(6));
         Assertions.assertEquals(4, rawData.get(7));
         Assertions.assertEquals(2, rawData.get(8));
+    }
+
+    @Test
+    public void testPrintWordCount() {
+        WordAnalyzer wordAnalyzer = new WordAnalyzer("C:\\Users\\gavin\\OneDrive\\Documents\\test_data.txt");
+
+        String wordCountString = wordAnalyzer.printWordCount();
+
+        Assertions.assertEquals("Word count = 25", wordCountString);
+    }
+
+    @Test
+    public void testPrintAverage() {
+        WordAnalyzer wordAnalyzer = new WordAnalyzer("C:\\Users\\gavin\\OneDrive\\Documents\\test_data.txt");
+
+        String averageString = wordAnalyzer.printAverage();
+
+        Assertions.assertEquals("Average word length = 3.440", averageString);
+    }
+
+    @Test
+    public void testPrintStatistics() {
+        WordAnalyzer wordAnalyzer = new WordAnalyzer();
+
+        List<String> statsList = wordAnalyzer.printStatistics("Hello world & good morning. The date is 18/05/2016");
+
+        Assertions.assertEquals("Number of words of length 1 is 1", statsList.get(0));
+        Assertions.assertEquals("Number of words of length 2 is 1", statsList.get(1));
+        Assertions.assertEquals("Number of words of length 3 is 1", statsList.get(2));
+        Assertions.assertEquals("Number of words of length 4 is 2", statsList.get(3));
+        Assertions.assertEquals("Number of words of length 5 is 2", statsList.get(4));
+        Assertions.assertEquals("Number of words of length 7 is 1", statsList.get(5));
+        Assertions.assertEquals("Number of words of length 10 is 1", statsList.get(6));
+    }
+
+    @Test
+    public void testPrintMaximumWordLengths() {
+        WordAnalyzer wordAnalyzer = new WordAnalyzer();
+
+        String maxWordLengths = wordAnalyzer.printMaximumWordLengths("Hello world & good morning. The date is 18/05/2016");
+
+        Assertions.assertEquals("The most frequently occurring word length is 2, for word lengths of 4 & 5", maxWordLengths);
     }
 }
