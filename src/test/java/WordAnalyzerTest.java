@@ -1,17 +1,24 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
 import java.util.*;
 
 public class WordAnalyzerTest {
 
     @Test
     public void testWordCount() {
-            WordAnalyzer wordAnalyzer = new WordAnalyzer();
-            int wordCount = wordAnalyzer.getWordCount("This is a test run");
+        WordAnalyzer wordAnalyzer = new WordAnalyzer();
+        int wordCount = wordAnalyzer.getWordCount("This is a test run");
 
-            Assertions.assertEquals(5, wordCount);
+        Assertions.assertEquals(5, wordCount);
+     }
+
+     @Test
+     public void testWordCountFromFile() {
+         WordAnalyzer wordAnalyzer = new WordAnalyzer("C:\\Users\\gavin\\OneDrive\\Documents\\test_data.txt");
+         int wordCount = wordAnalyzer.getWordCount();
+
+         Assertions.assertEquals(25, wordCount);
      }
 
     @Test
@@ -25,11 +32,28 @@ public class WordAnalyzerTest {
     }
 
     @Test
+    public void testGetStatisticsFromFile() {
+        WordAnalyzer wordAnalyzer = new WordAnalyzer("C:\\Users\\gavin\\OneDrive\\Documents\\test_data.txt");
+        Hashtable<Integer,Integer> wordDictionary = wordAnalyzer.getStatistics();
+
+        Assertions.assertEquals(7, wordDictionary.get(4));
+        Assertions.assertEquals(6, wordDictionary.get(2));
+    }
+
+    @Test
     public void testGetAverage() {
         WordAnalyzer wordAnalyzer = new WordAnalyzer();
         double average = wordAnalyzer.getAverage("This is a test run");
 
         Assertions.assertEquals(2.8, average);
+    }
+
+    @Test
+    public void testGetAverageFromFile() {
+        WordAnalyzer wordAnalyzer = new WordAnalyzer("C:\\Users\\gavin\\OneDrive\\Documents\\test_data.txt");
+        double average = wordAnalyzer.getAverage();
+
+        Assertions.assertEquals(3.48, average);
     }
 
     @Test
@@ -41,12 +65,30 @@ public class WordAnalyzerTest {
     }
 
     @Test
+    public void testGetMostFrequentWordLengthFromFile()
+    {
+        WordAnalyzer wordAnalyzer = new WordAnalyzer("C:\\Users\\gavin\\OneDrive\\Documents\\test_data.txt");
+        int mostFrequentWordLength = wordAnalyzer.getMostFrequentWordLength();
+
+        Assertions.assertEquals(7, mostFrequentWordLength);
+    }
+
+    @Test
     public void testGetMaximalWordLengths() {
         WordAnalyzer wordAnalyzer = new WordAnalyzer();
         List<Integer> maximalWordLengths = wordAnalyzer.getMaximalWordLengths("Hello world & good morning. The date is 18/05/2016");
 
         Assertions.assertEquals(4, maximalWordLengths.get(0));
         Assertions.assertEquals(5, maximalWordLengths.get(1));
+    }
+
+
+    @Test
+    public void testGetMaximalWordLengthsFromFile() {
+        WordAnalyzer wordAnalyzer = new WordAnalyzer("C:\\Users\\gavin\\OneDrive\\Documents\\test_data.txt");
+        List<Integer> maximalWordLengths = wordAnalyzer.getMaximalWordLengths();
+
+        Assertions.assertEquals(4, maximalWordLengths.get(0));
     }
 
     @Test

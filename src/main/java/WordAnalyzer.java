@@ -50,6 +50,10 @@ public class WordAnalyzer {
         return stringList.length;
     }
 
+    public int getWordCount() {
+        return _wordLengths.size();
+    }
+
     public Hashtable<Integer, Integer> getStatistics(String str) {
         String[] stringList = str.split("\\s");
         Hashtable<Integer, Integer> statsDictionary = new Hashtable<Integer, Integer>();
@@ -63,6 +67,29 @@ public class WordAnalyzer {
         statsDictionary.put(0, 0);
 
         for (int wordLength : wordLengths)
+        {
+            if (statsDictionary.containsKey(wordLength))
+            {
+                int currentFrequency = statsDictionary.get(wordLength);
+                statsDictionary.put(wordLength, ++currentFrequency);
+            }
+
+            else
+            {
+                statsDictionary.put(wordLength, 1);
+            }
+        }
+
+
+        return statsDictionary;
+    }
+
+    public Hashtable<Integer, Integer> getStatistics() {
+        Hashtable<Integer, Integer> statsDictionary = new Hashtable<Integer, Integer>();
+
+        statsDictionary.put(0, 0);
+
+        for (int wordLength : _wordLengths)
         {
             if (statsDictionary.containsKey(wordLength))
             {
@@ -96,8 +123,33 @@ public class WordAnalyzer {
         return (double) sum / wordLengths.size();
     }
 
+    public double getAverage() {
+        int sum = 0;
+        for(int wordLength : _wordLengths)
+            sum += wordLength;
+
+        return (double) sum / _wordLengths.size();
+    }
+
     public int getMostFrequentWordLength(String str) {
         Hashtable<Integer, Integer> statistics = getStatistics(str);
+
+        //Find the most frequent word length
+        int max = 0;
+        for (Integer key : statistics.keySet())
+        {
+            Integer tmp = statistics.get(key);
+            if (tmp.compareTo(max) > 0)
+            {
+                max = tmp;
+            }
+        }
+
+        return max;
+    }
+
+    public int getMostFrequentWordLength() {
+        Hashtable<Integer, Integer> statistics = getStatistics();
 
         //Find the most frequent word length
         int max = 0;
@@ -118,6 +170,26 @@ public class WordAnalyzer {
         List<Integer> maximalElements = new ArrayList<Integer>();
 
         Integer max = getMostFrequentWordLength(str);
+
+        //Obtain the lengths of words that have this frequency
+        for (HashMap.Entry<Integer, Integer> entry : statistics.entrySet())
+        {
+            if (entry.getValue().equals(max))
+            {
+                maximalElements.add(entry.getKey());
+            }
+        }
+
+        Collections.sort(maximalElements);
+
+        return maximalElements;
+    }
+
+    public List<Integer> getMaximalWordLengths() {
+        Hashtable<Integer, Integer> statistics = getStatistics();
+        List<Integer> maximalElements = new ArrayList<Integer>();
+
+        Integer max = getMostFrequentWordLength();
 
         //Obtain the lengths of words that have this frequency
         for (HashMap.Entry<Integer, Integer> entry : statistics.entrySet())
