@@ -157,11 +157,47 @@ public class WordAnalyzerTest {
     }
 
     @Test
+    public void testPrintStatisticsFromFile() {
+        WordAnalyzer wordAnalyzer = new WordAnalyzer("C:\\Users\\gavin\\OneDrive\\Documents\\test_data.txt");
+
+        List<String> statsList = wordAnalyzer.printStatistics();
+
+        Assertions.assertEquals("Number of words of length 1 is 1", statsList.get(0));
+        Assertions.assertEquals("Number of words of length 2 is 6", statsList.get(1));
+        Assertions.assertEquals("Number of words of length 3 is 5", statsList.get(2));
+        Assertions.assertEquals("Number of words of length 4 is 7", statsList.get(3));
+        Assertions.assertEquals("Number of words of length 5 is 6", statsList.get(4));
+    }
+
+    @Test
     public void testPrintMaximumWordLengths() {
         WordAnalyzer wordAnalyzer = new WordAnalyzer();
 
         String maxWordLengths = wordAnalyzer.printMaximumWordLengths("Hello world & good morning. The date is 18/05/2016");
 
         Assertions.assertEquals("The most frequently occurring word length is 2, for word lengths of 4 & 5", maxWordLengths);
+    }
+
+    @Test
+    public void testPrintMaximumWordLengthsFromFile() {
+        WordAnalyzer wordAnalyzer = new WordAnalyzer("C:\\Users\\gavin\\OneDrive\\Documents\\test_data.txt");
+
+        String maxWordLengths = wordAnalyzer.printMaximumWordLengths();
+
+        Assertions.assertEquals("The most frequently occurring word length is 7, for word lengths of 4", maxWordLengths);
+    }
+
+    //The following tests are visual verification only, no asserts..
+
+    @Test
+    public void testPrintStatisticsReportFromFile() {
+        WordAnalyzer wordAnalyzer = new WordAnalyzer("C:\\Users\\gavin\\OneDrive\\Documents\\test_data.txt");
+        wordAnalyzer.printStatisticsReport();
+    }
+
+    @Test
+    public void testPrintStatisticsReport() {
+        WordAnalyzer wordAnalyzer = new WordAnalyzer();
+        wordAnalyzer.printStatisticsReport("Hello world & good morning. The date is 18/05/2016");
     }
 }

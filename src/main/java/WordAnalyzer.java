@@ -213,8 +213,16 @@ public class WordAnalyzer {
         return "Word count = " + getWordCount();
     }
 
+    public String printWordCount(String str) {
+        return "Word count = " + getWordCount(str);
+    }
+
     public String printAverage() {
         return String.format("Average word length = %.3f", getAverage());
+    }
+
+    public String printAverage(String str) {
+        return String.format("Average word length = %.3f", getAverage(str));
     }
 
     public List<String> printStatistics(String str) {
@@ -237,8 +245,27 @@ public class WordAnalyzer {
         return statsList;
     }
 
-    public String printMaximumWordLengths(String str) {
+    public List<String> printStatistics() {
+        Hashtable<Integer, Integer> statistics = getStatistics();
+        List<String> statsList = new ArrayList<String>();
 
+        Enumeration<Integer> statsEnum = statistics.keys();
+
+        while(statsEnum.hasMoreElements())
+        {
+            int key = statsEnum.nextElement();
+            int frequency = statistics.get(key);
+
+            String frequencyEntry = String.format("Number of words of length %d is %d", key,  frequency);
+            statsList.add(frequencyEntry);
+        }
+
+        Collections.reverse(statsList);
+
+        return statsList;
+    }
+
+    public String printMaximumWordLengths(String str) {
 
         String preamble = String.format("The most frequently occurring word length is %d, for word lengths of ",
                                          getMostFrequentWordLength(str));
@@ -258,6 +285,56 @@ public class WordAnalyzer {
         String wordLengthList = wordLengthListBuilder.toString();
 
         return preamble + wordLengthList;
+    }
 
+    public String printMaximumWordLengths() {
+        String preamble = String.format("The most frequently occurring word length is %d, for word lengths of ",
+                getMostFrequentWordLength());
+        StringBuilder wordLengthListBuilder = new StringBuilder();
+
+        List<Integer> wordLengths = getMaximalWordLengths();
+
+        for (int i=0; i < wordLengths.size(); i++)
+        {
+
+            if (i == wordLengths.size() - 1)
+                wordLengthListBuilder.append(wordLengths.get(i));
+            else
+                wordLengthListBuilder.append(wordLengths.get(i)).append(" & ");
+        }
+
+        String wordLengthList = wordLengthListBuilder.toString();
+
+        return preamble + wordLengthList;
+    }
+
+    public void printStatisticsReport()
+    {
+        System.out.println(printWordCount());
+        System.out.println(printAverage());
+
+        List<String> statistics = printStatistics();
+
+        for (String entry : statistics)
+        {
+            System.out.println(entry);
+        }
+
+        System.out.println(printMaximumWordLengths());
+    }
+
+    public void printStatisticsReport(String str)
+    {
+        System.out.println(printWordCount(str));
+        System.out.println(printAverage(str));
+
+        List<String> statistics = printStatistics(str);
+
+        for (String entry : statistics)
+        {
+            System.out.println(entry);
+        }
+
+        System.out.println(printMaximumWordLengths(str));
     }
 }
