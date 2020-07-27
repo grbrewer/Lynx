@@ -1,6 +1,49 @@
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
+import java.io.BufferedReader;
 
 public class WordAnalyzer {
+
+    List<Integer> _wordLengths;
+
+    public WordAnalyzer()
+    {
+
+    }
+
+    public WordAnalyzer(String path) {
+        try {
+            _wordLengths = new ArrayList<Integer>();
+            BufferedReader br = new BufferedReader(new FileReader(path));
+            String thisLine;
+
+            while ((thisLine = br.readLine()) != null) {
+                List<Integer> lineLengths = getRawData(thisLine);
+                _wordLengths.addAll(lineLengths);
+            }
+        }
+        catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public List<Integer> getWordLengths()
+    {
+        return _wordLengths;
+    }
+
+    public List<Integer> getRawData(String str) {
+        String[] stringList = str.split("\\s");
+        List<Integer> wordLengths = new ArrayList<Integer>();
+
+        for (String word : stringList)
+        {
+            wordLengths.add(word.length());
+        }
+
+        return wordLengths;
+    }
 
     public int getWordCount(String str) {
         String[] stringList = str.split("\\s");

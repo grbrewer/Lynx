@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.*;
 
 public class WordAnalyzerTest {
@@ -48,4 +49,35 @@ public class WordAnalyzerTest {
         Assertions.assertEquals(5, maximalWordLengths.get(1));
     }
 
+    @Test
+    public void testGetRawData()
+    {
+        WordAnalyzer wordAnalyzer = new WordAnalyzer();
+        List<Integer> rawData = wordAnalyzer.getRawData("This is a test run");
+
+        Assertions.assertEquals(4, rawData.get(0));
+        Assertions.assertEquals(2, rawData.get(1));
+        Assertions.assertEquals(1, rawData.get(2));
+        Assertions.assertEquals(4, rawData.get(3));
+        Assertions.assertEquals(3, rawData.get(4));
+    }
+
+    @Test
+    public void testGetWordLengths() {
+        WordAnalyzer wordAnalyzer = new WordAnalyzer("C:\\Users\\gavin\\OneDrive\\Documents\\test_data.txt");
+        List<Integer> rawData = wordAnalyzer.getWordLengths();
+
+        //Data obtained from the 1st line grabbed
+        Assertions.assertEquals(1, rawData.get(0));
+        Assertions.assertEquals(3, rawData.get(1));
+        Assertions.assertEquals(2, rawData.get(2));
+        Assertions.assertEquals(4, rawData.get(3));
+        Assertions.assertEquals(4, rawData.get(4));
+        Assertions.assertEquals(5, rawData.get(5));
+
+        //Data obtained from 2nd line grabbed
+        Assertions.assertEquals(4, rawData.get(6));
+        Assertions.assertEquals(4, rawData.get(7));
+        Assertions.assertEquals(2, rawData.get(8));
+    }
 }
